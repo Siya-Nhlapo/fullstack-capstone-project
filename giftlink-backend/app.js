@@ -4,12 +4,16 @@ const express = require('express');
 const cors = require('cors');
 const pinoLogger = require('./logger');
 
+const giftRoutes = require('./routes/giftRoutes');
+
 const connectToDatabase = require('./models/db');
 const {loadData} = require("./util/import-mongo/index");
 
 
 const app = express();
 app.use("*",cors());
+// Add the giftRoutes to the server
+app.use('/api/gifts', giftRoutes);
 const port = 3060;
 
 // Connect to MongoDB; we just do this one time
