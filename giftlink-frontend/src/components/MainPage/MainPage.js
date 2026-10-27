@@ -23,6 +23,7 @@ function MainPage() {
                 console.log('Fetch error: ' + error.message);
             }
         }
+        fetchGift();
     }, []);
 
     // Task 2: Navigate to details page
