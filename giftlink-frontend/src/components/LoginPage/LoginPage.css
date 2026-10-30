@@ -1,15 +1,41 @@
 .login-card {
-    background-color: #fff;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #b1e9e9;
+    box-shadow: 0px 4px 8px rgba(64, 15, 244, 0.1);
 }
 
 .login-card .form-label {
     font-weight: 600;
 }
 
+/* --- INPUT FIELD STATES FLOW --- */
+
+/* 1. Default State: Red when empty and untouched */
 .login-card input {
+    border: 1px solid #dc3545; /* Red outline */
     border-radius: 0.25rem;
+    outline: none;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
+
+/* 2. Focus State: Changes to blue when clicked/active */
+.login-card input:focus {
+    border-color: #0056b3; /* Primary Blue */
+    box-shadow: 0 0 0 0.2rem rgba(0, 86, 179, 0.25); /* Subtle blue glow */
+}
+
+/* 3. Typing State: Turns red during focus if text is present */
+.login-card input.has-text:focus {
+    border-color: #28a745; /* Turns red when you start typing */
+    box-shadow: 0 0 0 0.2rem rgba(18, 255, 14, 0.247); /* Subtle red glow */
+}
+
+/* 4. Filled & Blurred State: Changes to green when user clicks away with text inside */
+.login-card input.has-text {
+    border-color: #28a745; /* Green outline */
+    box-shadow: none;
+}
+
+/* ------------------------------- */
 
 .login-card .btn {
     padding: 0.5rem 1rem;
