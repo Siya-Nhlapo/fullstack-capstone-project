@@ -25,16 +25,18 @@ function RegisterPage() {
                         <input
                             id="firstName"
                             type="text"
-                            className="form-control"
+                            /* DYNAMIC CLASS AT THE END: Adds 'has-text' if firstName is not empty */
+                            className={ `form-control ${firstName ? 'has-text' : ''}` }
                             placeholder="Enter your first name"
                             value={firstName}
                             onChange={(e) => setFirstName(e.target.value)}
                         />
-                        <label htmlFor="lastName" className="form label"> Last Name</label><br></br>
+                        <label htmlFor="lastName" className="form label"> first Name</label><br></br>
                         <input
                             id="lastName"
                             type="text"
-                            className="form-control"
+                            /* DYNAMIC CLASS AT THE END: Adds 'has-text' if lastName is not empty */
+                            className={ `form-control ${lastName ? 'has-text' : ''}` }
                             placeholder="Enter your last name"
                             value={lastName}
                             onChange={(e) => setLastName(e.target.value)}
@@ -43,7 +45,8 @@ function RegisterPage() {
                         <input
                             id="email"
                             type="text"
-                            className="form-control"
+                            /* DYNAMIC CLASS AT THE END: Adds 'has-text' if email is not empty */
+                            className={ `form-control ${email ? 'has-text' : ''}` }
                             placeholder="Enter your email address"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
@@ -52,7 +55,8 @@ function RegisterPage() {
                         <input
                             id="password"
                             type="text"
-                            className="form-control"
+                            /* DYNAMIC CLASS AT THE END: Adds 'has-text' if password is not empty */
+                            className={ `form-control ${password ? 'has-text' : ''}` }
                             placeholder="Enter your password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
