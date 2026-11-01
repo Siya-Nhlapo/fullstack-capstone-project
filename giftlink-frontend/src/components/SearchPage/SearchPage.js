@@ -3,11 +3,13 @@ import { useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {urlConfig} from '../../config';
 
-const [searchQuery, setSearchQuery] = useState('');
-const [ageRange, setAgeRange] = useState(6); // Initialize with minimum value
-const [searchResults, setSearchResults] = useState([]);
+
 
 function SearchPage() {
+
+    const [searchQuery, setSearchQuery] = useState('');
+    const [ageRange, setAgeRange] = useState(6); // Initialize with minimum value
+    const [searchResults, setSearchResults] = useState([]);
 
     //Task 1: Define state variables for the search query, age range, and search results.
     const categories = ['Living', 'Bedroom', 'Bathroom', 'Kitchen', 'Office'];
