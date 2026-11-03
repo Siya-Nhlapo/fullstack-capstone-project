@@ -1,16 +1,66 @@
-import Eeact, { useState } from 'react';
+import React, { useState } from 'react';
 import './RegisterPage.css';
+// Task 1: Import urlConfig from `giftlink-frontend/src/config.js`
+import {urlConfig} from '../../config';
+// Task 2: Import useAppContext `giftlink-frontend/context/AuthContext.js`
+import {useAppContext} from '../../context/AuthContext';
+// Task 3: Import useNavigate from `react-router-dom` to handle navigation after successful registration.
+import {useNavigate} from 'react-router-dom';
 
+/**Do these tasks inside the RegisterPage function, after the useStates definition
+ * // Task 4: Include a state for error message.
+ * // Task 5: Create a local variable for `navigate` and `setIsLoggedIn`.
+ */
 function RegisterPage() {
     // insert code here to create useState hook variables for firstName, lastName, email, password
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    // Step 1 - Task 4
+    const [showerr, setShowerr] = useState('');
+    // Step 1 - Task 5
+    const navigate = useNavigate();
+    const { setIsLoggedIn } = useAppContext();
 
     // insert code here to create handleRegister function and include console.log
-    const handleRegister = async () => {
-        console.log("Register invoked")
+    const handleRegister = async (req, res) => {
+        try {
+            const response = await fetch(`${urlConfig.backendUrl}/api/auth/register`, {
+                // Step 1 - Task 6: Set method
+                method: 'POST',
+                // Step 1 - Task 7: Set headers
+                headers: {
+                    'content-type': 'application/json',
+                },
+                // Step 1 - Task 8: Set body to send user details
+                body: JSON.stringify({
+                    firstName: firstName,
+                    lastName: lastName,
+                    email: email,
+                    password: password
+                })
+            });
+            // Step 2 - Task 1: Access data coming from fetch API
+            const json = await response.json();
+            // Step 2 - Task 2: Set user details
+            if (json.authtoken) {
+                sessionStorage.setItem('auth-token', json.authtoken);
+                sessionStorage.setItem('name', firstName);
+                sessionStorage.setItem('email', json.email);
+                // Step 2 - Task 3: insert code for setting logged in state
+                setIsLoggedIn(true);
+                // Step 2 - Task 4: insert code for navigating to MainPage
+                navigate('/app');
+            } if (json.error) { // Step 2 - Task 5: Set an error message if the registration fails.
+                setShowerr(json.error);
+            }
+            // Step 2 - Task 6: Display error message to enduser.
+            <div className="text-danger">{showerr}</div>
+        }
+        catch (e) {
+            
+        }
     }
 
     return (
