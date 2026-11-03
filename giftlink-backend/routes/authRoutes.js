@@ -26,10 +26,11 @@ router.post('/register', async (req, res) => {
         // Task 2: Access MongoDB collection
         const collection = db.collection("users");
         // Task 3: Check for existing email
+        const existingEmail = await collection.findOne({ email: req.body.email });
+
         const salt = await bcryptjs.genSalt(10);
         const hash = await bcryptjs.hash(req.body.password, salt)
-
-        const existingEmail = await collection.findOne({ email: req.body.email });
+        const email = req.body.email;
 
         // Task 4: Save user details in database
         const newUser = await collection.insertOne({
@@ -42,10 +43,12 @@ router.post('/register', async (req, res) => {
         // Task 5: Create JWT authentication with user._id as payload
         const payload = {
             user: {
-                id: newUser.insertId,
+                id: newUser.insertedId,
             },
         };
         const authToken = jwt.sign(payload, JWT_SECRET);
+        logger.info('User registered successfully');
+        return res.status(201).json({ authToken, email: req.body.email });
     }
     catch (e) {
         return res.status(500).send('Internal server error');
