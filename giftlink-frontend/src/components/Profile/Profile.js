@@ -12,6 +12,7 @@ const Profile = () => {
 
  const [editMode, setEditMode] = useState(false);
   const navigate = useNavigate();
+  
   useEffect(() => {
     const authtoken = sessionStorage.getItem("auth-token");
     if (!authtoken) {
@@ -53,7 +54,7 @@ setUpdatedDetails({
 };
 const handleSubmit = async (e) => {
   e.preventDefault();
-  
+
   try {
     const authtoken = sessionStorage.getItem('auth-token');
     const email = sessionStorage.getItem('email');
