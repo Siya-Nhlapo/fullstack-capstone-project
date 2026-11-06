@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './LoginPage.css';
 // Step 1 - Task 1: Import urlConfig from 'giftlink-frontend/src/config.js'
 import {urlConfig} from '../../../src/config';
