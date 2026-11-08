@@ -71,7 +71,7 @@ router.post('/register', async (req, res) => {
         };
 
         const authToken = jwt.sign(payload, JWT_SECRET);
-        req.logger.info('User registered successfully');
+        req.log.info('User registered successfully');
         return res.status(201).json({ authToken, email: req.body.email });
     }
     catch (e) {
